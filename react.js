@@ -20,7 +20,7 @@ class Board extends React.Component {     // создаём компонент B
 
   render() {
     return (
-      <div>
+      <div className="board">
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -80,10 +80,11 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ? 'Перейти к ходу #' + move : 'К началу игры';
+      const desc = move ? 'Перейти к ходу #' + move : 'Начать с начала';
       return (
         <li key={move}>
-          <button onClick = {() => this.jumpTo(move)}>
+          <button className="transition" 
+                  onClick = {() => this.jumpTo(move)}>
           {desc}
           </button>
           <Board 
@@ -96,9 +97,9 @@ class Game extends React.Component {
 
     let status;
     if (winner){
-      status = 'Выиграл ' + winner;
+      status = 'Выиграл игрок: ' + winner;
     } else {
-      status = 'Следующий ход: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = 'Ход игрока: ' + (this.state.xIsNext ? 'X' : 'O');
     }
     return (
       <div className="game">
@@ -109,7 +110,7 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{ status }</div>
+          <div className="status">{ status }</div>
           <ol>{moves}</ol>
         </div>
       </div>
